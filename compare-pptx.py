@@ -7,7 +7,13 @@ import numpy as np
 import sys
 
 VERSION = "0.6.1"
-programstr = f"PowerPoint比較解析ツール %(prog)s {VERSION}"
+commandstr = sys.argv[0]
+# 先頭の './', '.\\' を除去
+if commandstr.startswith("./"):
+    commandstr = commandstr[2:]
+elif commandstr.startswith(".\\"):
+    commandstr = commandstr[2:]
+programstr = f"PowerPoint比較解析ツール {commandstr} {VERSION}"
 
 print(programstr)
 if sys.argv[1] == "--version":
@@ -40,9 +46,9 @@ defaultbaseexportname = "base"  # 旧ファイルexport画像のファイル名�
 defaultmatch = 0  # 完全一致とみなす閾値
 defaulthigh = 4  # 類似とみなす閾値
 defaultlow = 10  # 類似かもしれない閾値
-defaulttextmatch = 0.95  # 完全一致とみなす閾値
-defaulttexthigh = 0.90  # 類似とみなす閾値
-defaulttextlow = 0.80  # 類似かもしれない閾値
+defaulttextmatch = 5  # 完全一致とみなす閾値
+defaulttexthigh = 10  # 類似とみなす閾値
+defaulttextlow = 20  # 類似かもしれない閾値
 defaultoutput = "analyzed"  # 出力ファイル名（拡張子なし）
 
 
@@ -98,9 +104,9 @@ def parse_args():
     parser.add_argument("--match", type=int, default=f"{defaultmatch}", help="完全一致とみなす閾値（デフォルト: 0）")
     parser.add_argument("--high", type=int, default=f"{defaulthigh}", help="類似とみなす閾値（デフォルト: 10）")
     parser.add_argument("--low", type=int, default=f"{defaultlow}", help="類似かもしれない閾値（デフォルト: 20）")
-    parser.add_argument("--textmatch", type=float, default=f"{defaulttextmatch}", help="テキストを完全一致とみなす閾値（デフォルト: 0.95）")
-    parser.add_argument("--texthigh", type=float, default=f"{defaulttexthigh}", help="テキストを類似とみなす閾値（デフォルト: 0.90）")
-    parser.add_argument("--textlow", type=float, default=f"{defaulttextlow}", help="テキストを類似かもしれないとみなす閾値（デフォルト: 0.80）")
+    parser.add_argument("--textmatch", type=float, default=f"{defaulttextmatch}", help="テキストを完全一致とみなす閾値（デフォルト: 5）")
+    parser.add_argument("--texthigh", type=float, default=f"{defaulttexthigh}", help="テキストを類似とみなす閾値（デフォルト: 10）")
+    parser.add_argument("--textlow", type=float, default=f"{defaulttextlow}", help="テキストを類似かもしれないとみなす閾値（デフォルト: 20）")
     parser.add_argument("--output", type=str, default=f"{defaultoutput}", help="解析結果のファイル名（拡張子なし）")
 
     args = parser.parse_args()
@@ -289,6 +295,27 @@ def output_html(derived_analyzed, args):
     print(f"✅ 比較結果出力完了(HTML): {output_htmlpath}")
 
 
+# 引数で指定されるテキスト閾値を 0～1.0 の範囲に変換する
+# 例えば、引数で 5 を指定した場合、0.95 に
+# 10 を指定した場合、0.90 に変換される
+def convertSimilarityThreshold(value):
+    if value <= 0:
+        return 1.0
+    elif value >= 100:
+        return 0.0
+    else:
+        return (100 - value) / 100.0
+
+# 引数で指定されるテキスト閾値を 0～100 の範囲に変換する
+# convertSimilarityThreshold() の逆関数
+def invertSimilarityThreshold(value):
+    if value <= 0:
+        return 100
+    elif value >= 1.0:
+        return 0
+    else:
+        return int((1.0 - value) * 100.0)
+
 
 def main():
     args = parse_args()
@@ -327,13 +354,13 @@ def main():
             grade = "different"
 
             # ハッシュ値を比較
-            if hash_diff <= args.match or vector_similarity >= args.textmatch:
+            if hash_diff <= args.match or vector_similarity >= convertSimilarityThreshold(args.textmatch):
                 grade = "match"
                 print(f"(完全)一致: derived:{di} base:{bi}")
-            elif hash_diff <= args.high or vector_similarity >= args.texthigh:
+            elif hash_diff <= args.high or vector_similarity >= convertSimilarityThreshold(args.texthigh):
                 grade = "high"
                 print(f"高い類似性: derived:{di} base:{bi}")
-            elif hash_diff <= args.low or vector_similarity >= args.textlow:
+            elif hash_diff <= args.low or vector_similarity >= convertSimilarityThreshold(args.textlow):
                 grade = "low"
                 print(f"低い類似性: derived:{di} base:{bi}")
             else:
@@ -345,7 +372,7 @@ def main():
                     "slideimage": base_slide["slideimage"],
                     "grade": grade,
                     "imagescore": hash_diff,
-                    "textscore":  format(vector_similarity, '.2f'),
+                    "textscore":  str(invertSimilarityThreshold(vector_similarity)),
                     "pptxfile": base_analyzed["pptxfile"],
                     "slideindex": bi,
                 })

@@ -22,7 +22,6 @@ Before running the project, make sure you have the following software installed:
 
 - Web browser (needed to view the result report).
 
-
 ## How to use
 
 ### install required packages
@@ -55,7 +54,7 @@ The report will be generated in the export/analyzed#DATETIME#/comparison\_report
 - Low: lists slides of Oldslides.pptx, having relatively low similarity with the original. It means that there is a slight possibility that it could be a similar slide. Multiple slides can be listed, if any.
 - ImageDifference: this almost black picture shows the diffrerence between the old and the new. Parts of the two images that have no difference will appear black, while the areas with differences will appear in brighter colors. This makes it easy to identify the areas with differences.
 - NewSlide: the file name of the image output of the corresponding slide from Newslides.pptx
-- ImageScore: the similarity score of the two images. Small value means high similarity. Zero means almost identical.
-- TextScore: the similarity score of the texts of the two slides. Large value means high similarity, 100 means almost identical.
+- ImageScore: the similarity score of the images of the two slides. Small value means high similarity. Zero means almost identical.
+- TextScore: the similarity score of the texts of the two slides. Small value means high similarity, Zero means almost identical.
 
 ![kioku-250516-172010-2632](https://github.com/user-attachments/assets/a56ca9bc-4655-4965-b5ee-cd90d596f6b3)
