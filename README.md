@@ -12,6 +12,7 @@ To install the required Python packages, run the following command:
 
 ```bash
 pip install ImageHash numpy scikit-learn comtypes Pillow sentence-transformers
+```
 
 
 
