@@ -2,6 +2,10 @@
 
 This Python tool compares two PowerPoint pptx files, searching similar slides based on two criteria: image similarity and text similarity.
 
+It generates the report looks like below:
+
+![kioku-250516-191130-2633](https://github.com/user-attachments/assets/47ba0bd6-cc84-4b09-bda7-95dfb6cdc58c)
+
 It helps you when you have many subtly different pptx files as a result of repeated fine-tuning of a pptx.
 
 ## Requirements
@@ -57,4 +61,5 @@ The report will be generated in the export/analyzed#DATETIME#/comparison\_report
 - ImageScore: the similarity score of the images of the two slides. Small value means high similarity. Zero means almost identical.
 - TextScore: the similarity score of the texts of the two slides. Small value means high similarity, Zero means almost identical.
 
-![kioku-250516-172010-2632](https://github.com/user-attachments/assets/a56ca9bc-4655-4965-b5ee-cd90d596f6b3)
+![kioku-250516-191130-2633](https://github.com/user-attachments/assets/47ba0bd6-cc84-4b09-bda7-95dfb6cdc58c)
+
