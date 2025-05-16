@@ -1,0 +1,88 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Pyre type checker
+.pyre/
+
+# mypy
+.mypy_cache/
+
+# pytype
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# virtual environments
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+.env/
+.venv.bak/
+
+# VSCode settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# macOS files
+.DS_Store
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Logs
+*.log
+
+# dotenv
+.env
+.env.*
+
+# pyproject.toml tools (like poetry/pdm)
+__pypackages__/
+
+# 開発中の雑多なテストデータディレクトリ
+example/
+export/
+
