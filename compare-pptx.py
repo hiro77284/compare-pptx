@@ -14,7 +14,7 @@ if sys.argv[1] == "--version":
     sys.exit(0)
 
 # 重いライブラリをインポートする前に、PowerPoint 起動の注意と操作禁止の確認を求めておく
-user_input = input("PowerPointを2回起動して画像を出力します。その間、キー操作を行わないでください。(y/n): ")
+user_input = input("PowerPointを2回起動して画像を出力します。その間、キー操作を行わないでください。\nInvoking PowerPoint app 2 times. Please do not perform any actions during this time. (y/n): ")
 if user_input.lower() != 'y':
     print("処理を中止します。")
     sys.exit(1)
@@ -270,10 +270,10 @@ def output_html(derived_analyzed, args):
             cell = ""
             for sim in graded[grade]:
                 sim_path = os.path.join(args.basedir, sim["slideimage"]).replace("\\", "/")
-                label = f"{sim['slideimage']}<br>imagescore {sim['imagescore']} pt<br>textscore {sim['textscore']} pt<br>{sim['pptxfile']}"
+                label = f"NewSlide: {sim['slideimage']}<br>ImageScore: {sim['imagescore']} pt<br>TextScore: {sim['textscore']} pt<br>OldPptx: {sim['pptxfile']}"
                 cell += f"<a href='{sim_path}' target='_blank'><img src='{sim_path}' class='thumb'></a><br>{label}<br><br>"
                 diff_path = os.path.join(args.diffdir, f"diff_{di}_{sim['slideindex']}.png")
-                difflabel = f"差分ファイル"
+                difflabel = f"ImageDifference"
                 cell += f"<a href='{diff_path}' target='_blank'><img src='{diff_path}' class='thumb'></a><br>{difflabel}<br><br>"
 
             html.append(f"<td>{cell if cell else '-'}</td>")
