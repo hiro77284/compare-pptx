@@ -6,7 +6,7 @@ from itertools import combinations
 import numpy as np
 import sys
 
-VERSION = "0.6.0"
+VERSION = "0.6.1"
 programstr = f"PowerPoint比較解析ツール %(prog)s {VERSION}"
 
 print(programstr)
