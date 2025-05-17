@@ -112,7 +112,7 @@ The script makes working directories and files under the exportroot directory, y
 python compare-pptx.py --exportroot DIR Newslide.pptx Oldslide.pptx
 ```
 
-where DIR can be a relative/absolute path. If it contains '#DT#' string, it would be replace to the current datetime string. The default exportroot is './export/analyzed#DT#'.
+where DIR can be a relative/absolute path. If it contains '#DT#' string, it would be replaced to the current datetime string. The default exportroot is './export/analyzed#DT#'.
 
 After checking it up, you can delete the entire working directories generated. 
 
