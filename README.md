@@ -67,6 +67,9 @@ The report will be generated in the export/analyzed#DATETIME#/comparison\_report
 
 The overall process flow looks like this:
 
+![kioku-250517-162036-2639](https://github.com/user-attachments/assets/744c305c-df54-4e10-93e3-efd8cb65ca54)
+
+
 ### exporting images of the pptx files
 
 Assuming that you have two pptx that Newslides.pptx and Oldslides.pptx, specify them as the parameters to the compare-pptx.py script.
