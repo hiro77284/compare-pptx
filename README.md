@@ -100,7 +100,7 @@ The script invokes the PowerPoint application to export images and collect text 
 
 The script compares the hash values of the new and the old slides one by one, finds similarity and stores the information of the pair of high similarity in the derived_analyzed.json file. A slide of the new pptx could have multiple slides of the new as the similars.
 
-### repots the assignments as an html file
+### reports the assignments as an html file
 
 Finally, the script generates a report of the assignments as an html file, named comparison_report.html in the exportroot directory.
 
