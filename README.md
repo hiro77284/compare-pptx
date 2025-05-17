@@ -113,7 +113,6 @@ python compare-pptx.py --exportroot DIR Newslide.pptx Oldslide.pptx
 ```
 
 where DIR can be a relative/absolute path. If it contains '#DT#' string, it would be replace to the current datetime string. The default exportroot is './export/analyzed#DT#'.
-![kioku-250516-191130-2633](https://github.com/user-attachments/assets/47ba0bd6-cc84-4b09-bda7-95dfb6cdc58c)
 
 After checking it up, you can delete the entire working directories generated. 
 
