@@ -2,6 +2,10 @@
 
 This Python tool compares two PowerPoint pptx files, searching similar slides based on two criteria: image similarity and text similarity.
 
+It generates the report looks like below:
+
+![kioku-250516-191130-2633](https://github.com/user-attachments/assets/47ba0bd6-cc84-4b09-bda7-95dfb6cdc58c)
+
 It helps you when you have many subtly different pptx files as a result of repeated fine-tuning of a pptx.
 
 ## Requirements
@@ -63,8 +67,6 @@ The report will be generated in the export/analyzed#DATETIME#/comparison\_report
 
 The overall process flow looks like this:
 
-
-
 ### exporting images of the pptx files
 
 Assuming that you have two pptx that Newslides.pptx and Oldslides.pptx, specify them as the parameters to the compare-pptx.py script.
@@ -108,4 +110,5 @@ python compare-pptx.py --exportroot DIR Newslide.pptx Oldslide.pptx
 ```
 
 where DIR can be a relative/absolute path. If it contains '#DT#' string, it would be replace to the current datetime string. The default exportroot is './export/analyzed#DT#'.
+![kioku-250516-191130-2633](https://github.com/user-attachments/assets/47ba0bd6-cc84-4b09-bda7-95dfb6cdc58c)
 
