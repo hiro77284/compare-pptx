@@ -73,7 +73,7 @@ The overall process flow looks like this:
 ### exporting images of the pptx files
 
 Assuming that you have two pptx that Newslides.pptx and Oldslides.pptx, specify them as the parameters to the compare-pptx.py script.
-The script exports images of them to the driveddir and the basedir. The new is a derivative of the old, so the working directories are called as such.
+The script exports images of them to the deriveddir and the basedir. The new is a derivative of the old, so the working directories are called as such.
 
 ### calculate hash values
 
@@ -114,4 +114,6 @@ python compare-pptx.py --exportroot DIR Newslide.pptx Oldslide.pptx
 
 where DIR can be a relative/absolute path. If it contains '#DT#' string, it would be replace to the current datetime string. The default exportroot is './export/analyzed#DT#'.
 ![kioku-250516-191130-2633](https://github.com/user-attachments/assets/47ba0bd6-cc84-4b09-bda7-95dfb6cdc58c)
+
+After checking it up, you can delete the entire working directories generated. 
 
