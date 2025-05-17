@@ -58,3 +58,54 @@ The report will be generated in the export/analyzed#DATETIME#/comparison\_report
 - TextScore: the similarity score of the texts of the two slides. Small value means high similarity, Zero means almost identical.
 
 ![kioku-250516-172010-2632](https://github.com/user-attachments/assets/a56ca9bc-4655-4965-b5ee-cd90d596f6b3)
+
+## How it works
+
+The overall process flow looks like this:
+
+
+
+### exporting images of the pptx files
+
+Assuming that you have two pptx that Newslides.pptx and Oldslides.pptx, specify them as the parameters to the compare-pptx.py script.
+The script exports images of them to the driveddir and the basedir. The new is a derivative of the old, so the working directories are called as such.
+
+### calculate hash values
+
+The script calculates the imagehash and the textvector of the images, stores in derived.json and base.json. An imagehash is a hash value that summarizes the visual characteristics of an image, useful for estimating the similarity of images. The value is calculated using the following formula.
+
+```python
+import imagehash
+with Image.open(imaagepath) as img:
+    hash = imagehash.phash(img)
+```
+
+A textvector is also a summarized value of the characteristics of text of a slide. A slide contains multiple shapes with texts, so the script extracts and concatinates them to a long text, calculates the textvector using the following formula.
+
+```python
+model = SentenceTransformer('all-MiniLM-L6-v2') 
+textvector = model.encode(slide_text)
+```
+
+Calculated hash values are stored in json files in the exportroot directory, such as: derived_analyzed.json and base_analyzed.json.
+
+The script invokes the PowerPoint application to export images and collect text from slides.
+
+### compare hash values, find similarity, assigns new and old slides
+
+The script compares the hash values of the new and the old slides one by one, finds similarity and stores the information of the pair of high similarity in the derived_analyzed.json file. A slide of the new pptx could have multiple slides of the new as the similars.
+
+### repots the assignments as an html file
+
+Finally, the script generates a report of the assignments as an html file, named comparison_report.html in the exportroot directory.
+
+## clean up
+
+The script makes working directories and files under the exportroot directory, you can specify the location by the --exportroot option, such as:
+
+```bash
+python compare-pptx.py --exportroot DIR Newslide.pptx Oldslide.pptx
+```
+
+where DIR can be a relative/absolute path. If it contains '#DT#' string, it would be replace to the current datetime string. The default exportroot is './export/analyzed#DT#'.
+
