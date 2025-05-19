@@ -209,9 +209,9 @@ def export_pptx_images(pptxpath, exportdir, exportfilename):
 
         # 各スライドを PNG で出力
         imagefile = f"{exportfilename}_{i}.png"
-        imaagepath = os.path.join(exportdir, imagefile)
-        slide.Export(imaagepath, "PNG")
-        with Image.open(imaagepath) as img:
+        imagepath = os.path.join(exportdir, imagefile)
+        slide.Export(imagepath, "PNG")
+        with Image.open(imagepath) as img:
             hash = imagehash.phash(img)
         analyzed["slides"].append({
             "slideimage": imagefile,
