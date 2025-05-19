@@ -28,7 +28,7 @@ Before running the project, make sure you have the following software installed:
 
 ## How to use the tool
 
-### 1. install required packages
+### 1. Install required packages
 
 To install the required Python packages, run the following command:
 
@@ -36,7 +36,7 @@ To install the required Python packages, run the following command:
 pip install ImageHash numpy scikit-learn comtypes Pillow sentence-transformers
 ```
 
-### 2. run the Script
+### 2. Run the Script
 
 After modifying Oldslides.pptx to create Newslides.pptx, you may want to see what has changed. In that case, you can find the modifications using the following:
 
@@ -46,11 +46,11 @@ python compare-pptx.py Newslides.pptx Oldslides.pptx
 
 "compare-pptx.py" generates a report that lists slides in Oldslides.pptx that are similar to those in Newslides.pptx.
 
-### 3. check the report
+### 3. Check the report
 
 The report will be generated in the export/analyzed#DATETIME#/comparison\_report.html in the current directory. #DATETIME# will be replaced with the timestamp of when the script is run.
 
-## the format of the report
+## The format of the report
 
 - Original: lists all slides of Newslides.pptx, including no matches found.
 - Match: lists slides of Oldslides.pptx that matched with the original (meaning almost identical). Multiple slides can be listed.
@@ -69,12 +69,12 @@ The overall process flow looks like this:
 
 ![kioku-250517-162036-2639](https://github.com/user-attachments/assets/744c305c-df54-4e10-93e3-efd8cb65ca54)
 
-### exporting images of the pptx files
+### 1. Exports images of the pptx files
 
 Assuming that you have two pptx, Newslides.pptx and Oldslides.pptx, specify them as the parameters to the compare-pptx.py script.
 The script exports images of them to the deriveddir and the basedir. The new is a derivative of the old, so the working directories are called as such.
 
-### calculate hash values
+### 2. Calculates hash values
 
 The script calculates the imagehash and the textvector of the images, and stores them in derived.json and base.json. An imagehash is a hash value that summarizes the visual characteristics of an image, useful for estimating the similarity of images. The value is calculated using the following formula:
 
@@ -95,15 +95,15 @@ Calculated hash values are stored in json files in the exportroot directory, suc
 
 The script invokes the PowerPoint application to export images and collect text from slides.
 
-### compares hash values, finds similarities and stores them
+### 3. Compares hash values, finds similarities and stores them
 
 The script compares the hash values of the new and the old slides one by one, finds similarity and stores the information of the pair of high similarity in the derived_analyzed.json file. A slide of the new pptx could have multiple slides of the new as the similars.
 
-### reports the similarities as an HTML file
+### 4. Reports the similarities as an HTML file
 
-Finally, the script generates a report of the similarities as an html file, named comparison_report.html in the exportroot directory.
+Finally, the script generates a report of the similarities as an html file named comparison_report.html in the exportroot directory.
 
-## clean up
+## How to clean up working directories
 
 The script makes working directories and files under the exportroot directory, and you can specify the location by the --exportroot option, such as:
 
